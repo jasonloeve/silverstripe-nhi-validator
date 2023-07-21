@@ -1,1 +1,7 @@
-# see https://docs.silverstripe.org/en/developer_guides/configuration/configuration/
+---
+Name: nhi-field-fieldtypes
+After: corefieldtypes
+---
+SilverStripe\Core\Injector\Injector:
+  Color:
+    class: JasonLoeve\NHIValidator\NHIField

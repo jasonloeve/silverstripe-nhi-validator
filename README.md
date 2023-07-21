@@ -1,88 +1,50 @@
-# Silverstripe CMS supported module skeleton
+# silverstripe-nhi-validator
 
-A useful skeleton to more easily create a [Silverstripe CMS Module](https://docs.silverstripe.org/en/developer_guides/extending/modules/) that conform to the
-[Module Standard](https://docs.silverstripe.org/en/developer_guides/extending/modules/#module-standard).
+The SilverStripe NHI Validator module is a valuable extension for SilverStripe CMS, designed to enhance the validation process of NHI (National Health Index) numbers. This module provides a convenient validator input field that can be seamlessly integrated into both the CMS and the frontend of your website or web application.
 
-This README contains descriptions of the parts of this module base you should customise to meet you own module needs.
-For example, the module name in the H1 above should be you own module name, and the description text you are reading now
-is where you should provide a good short explanation of what your module does.
+## Table of Contents
 
-Where possible we have included default text that can be included as is into your module and indicated in
-other places where you need to customise it
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
 
-Below is a template of the sections of your `README.md` you should ideally include to met the Module Standard
-and help others make use of your modules.
+## Features
+1. ***NHI Number Validation:*** The module enables you to validate NHI numbers, ensuring their accuracy and compliance with the current and upcoming NHI format standards.
+2. ***Effortless Integration:*** Easily incorporate the NHI validator input field into your SilverStripe CMS, allowing for streamlined validation of NHI numbers within your content management system.
+3. ***User-Friendly Frontend Validation:*** Extend the validation functionality to the frontend of your website or web application, providing a seamless user experience by ensuring the correctness of NHI numbers entered by users.
+4. ***Improved Data Integrity:*** With the NHI Validator module, you can eliminate the need for manual validation processes, reducing the risk of data errors and improving the overall data integrity.
 
-## Steps to prepare this module for your own use
-
-Ensure you read the
-['publishing a module'](https://docs.silverstripe.org/en/developer_guides/extending/how_tos/publish_a_module/) guide
-and update your module's `composer.json` to designate your code as a Silversripe CMS module.
-
-- Clone this repository into a folder
-- Add your name/organisation to `LICENSE.md`
-- Update this README with information about your module. Ensure sections that aren't relevant are deleted and
-placeholders are edited where relevant
-- Review the README files in the various provided directories. You should ultimately delete these README files when you have added your code
-- Update the module's `composer.json` with your requirements and package name
-- Update (or remove) `package.json` with your requirements and package name. Run `yarn install` (or remove `yarn.lock`) to
-ensure dependencies resolve correctly
-- Clear the git history by running `rm -rf .git && git init`
-- Add and push to a VCS repository
-- Either [publish](https://getcomposer.org/doc/02-libraries.md#publishing-to-packagist) the module on packagist.org, or add a [custom repository](https://getcomposer.org/doc/02-libraries.md#publishing-to-a-vcs) to your main `composer.json`
-- Require the module in your main `composer.json`
-- If you need to build your css or js and are using components, injector, scss variables, etc from `silverstripe/admin`:
-  - Ensure that `silverstripe/admin` is installed with `composer install --prefer-source` instead of the default `--prefer-dist` (you can use `composer reinstall silverstripe/admin --prefer-source` if you already installed it)
-  - If you are relying on additional dependencies from `silverstripe/admin` instead of adding them as dependencies in your `package.json` file, you need to install third party dependencies in `silverstripe/admin` by running `yarn install` in the `vendor/silverstripe/admin/` directory.
-- Start developing your module!
-
-## License
-
-See [License](LICENSE.md)
-
-This module template defaults to using the "BSD-3-Clause" license. The BSD-3 license is one of the most
-permissive open-source license and is used by most Silverstripe CMS module.
-
-To publish your module under a different license:
-
-- update the [`license.md`](LICENSE.md) file
-- update the `license' key in your [`composer.json`](composer.json).
-
-You can use [choosealicense.com](https://choosealicense.com) to help you pick a suitable license for your project.
-
-You do not need to keep this section in your README file - the `LICENSE.md` file is sufficient.
+## Requirements
+PHP 8
+SilverStripe Framework 5
 
 ## Installation
-
-Replace `silverstripe-module/skeleton` in the command below with the composer name of your module.
-
-```sh
-composer require silverstripe-module/skeleton
+Install using composer
+```bash
+composer require jasonloeve/silverstripe-nhi-validator ^5@dev
 ```
 
-**Note:** When you have completed your module, submit it to Packagist or add it as a VCS repository to your
-project's composer.json, pointing to the private repository URL.
+## Usage
+To specify an NHI database field on a DataObject, you can create a new class called "Patient" that extends "DataObject" and define the "NationalHealthIndex" field as a custom database field with the type "NHI," which is equivalent to a Varchar(7). Additionally, when scaffolding a form, any NHI database field will automatically use the "NHIField" form field instead of the standard "TextField."
+```php
+<?php
 
-## Documentation
+use SilverStripe\ORM\DataObject;
+use JasonLoeve\NHIValidator\NHIField;
 
-- [Documentation readme](docs/en/README.md)
+class Patient extends DataObject
+{
+    private static $db = [
+        'NHINumber' => 'NHIField',
+    ];
 
-Add links into your `docs/<language>` folder here unless your module only requires minimal documentation
-in that case, add here and remove the docs folder. You might use this as a quick table of content if you
-mhave multiple documentation pages.
-
-## Example configuration
-
-If your module makes use of the config API in Silverstripe CMS it's a good idea to provide an example config
-here that will get the module working out of the box and expose the user to the possible configuration options.
-Though note that in many cases simply linking to the documentation is enough.
-
-Provide a syntax-highlighted code examples where possible.
-
-```yaml
-Page:
-  config_option: true
-  another_config:
-    - item1
-    - item2
+    ...
+}
 ```
+
+## Validation
+
+## License
+This software is licensed under the BSD-3-Clause License.
