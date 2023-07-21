@@ -11,5 +11,23 @@ use SilverStripe\Forms\TextField;
  */
 class NHIValidatorField extends TextField
 {
+    public function __construct($name, $title = null, $value = '', $form = null)
+    {
+        parent::__construct($name, $title, $value, 7, $form);
+    }
 
+    public function validateString()
+    {
+
+    }
+
+    private function processString(string $formatType)
+    {
+
+    }
+
+    private function extractLetter($c)
+    {
+
+    }
 }
