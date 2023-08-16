@@ -4,82 +4,73 @@ namespace JasonLoeve\NHIValidator\Forms;
 
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\TextField;
+use JasonLoeve\NHIValidator\Utils\StringValidator;
 
 /**
- * NHI validator field
+ * NHIValidatorField represents a form input field specifically designed
+ * to handle and validate National Health Index (NHI) numbers.
  */
 class NHIValidatorField extends TextField
 {
     /**
-     * Returns an input field.
+     * Constructs the NHIValidatorField.
      *
-     * @param string $name
-     * @param null|string $title
-     * @param string $value
-     * @param null|Form $form
+     * @param string $name Name of the form input field.
+     * @param null|string $title Title or label for the input field.
+     * @param string $value Pre-filled value for the field.
+     * @param null|Form $form The parent form instance (if any) this field belongs to.
      */
     public function __construct($name, $title = null, $value = '', $form = null)
     {
+        // Assign the field to the provided form, if a form is given.
         if ($form) {
             $this->setForm($form);
         }
 
+        // Call the parent constructor while defining a maximum character limit of 7.
         parent::__construct($name, $title, 7, $value, $form);
+
+        // Add a CSS class 'text' to the field for styling.
+        $this->addExtraClass('text');
     }
 
-    public function validateString()
+    /**
+     * Validates the current value of the field against NHI formats.
+     *
+     * @return bool True if the value is a valid NHI string, false otherwise.
+     */
+    public function validateString(): bool
     {
+        // Instantiate the string validator with the current field value.
+        $validator = new StringValidator($this->Value());
 
+        // Return the validation result.
+        return $validator->validateString();
     }
 
-    private function processString(string $formatType)
+    /**
+     * Validates the field value both for basic TextField requirements and NHI specifics.
+     *
+     * @param Validator $validator Validator instance for registering validation errors.
+     * @return bool True if validation passes, false otherwise.
+     */
+    public function validate(Validator $validator)
     {
+        // First, ensure basic TextField validations are satisfied.
+        if (!parent::validate($validator)) {
+            return false;
+        }
 
-    }
-
-    private function extractLetter($c)
-    {
-
+        // Then, check if the value is a valid NHI format.
+        if (!$this->validateString()) {
+            // If not, add a validation error to the field.
+            $validator->validationError(
+                $this->getName(),
+                _t('JasonLoeve\NHIValidator\Forms\NHIValidatorField.INVALID_FORMAT', 'Invalid NHI format.'),
+                "validation"
+            );
+            return false;
+        }
+        return true;
     }
 }
-
-
-
-//
-//
-//
-///**
-// * Validate this field
-// *
-// * @param Validator $validator
-// * @return bool
-// */
-//public function validate($validator)
-//{
-//    $result = true;
-//    if (!is_null($this->maxLength) && mb_strlen($this->value ?? '') > $this->maxLength) {
-//        $name = strip_tags($this->Title() ? $this->Title() : $this->getName());
-//        $validator->validationError(
-//            $this->name,
-//            _t(
-//                'SilverStripe\\Forms\\TextField.VALIDATEMAXLENGTH',
-//                'The value for {name} must not exceed {maxLength} characters in length',
-//                ['name' => $name, 'maxLength' => $this->maxLength]
-//            ),
-//            "validation"
-//        );
-//        $result = false;
-//    }
-//    return $this->extendValidationResult($result, $validator);
-//}
-//
-//public function getSchemaValidation()
-//{
-//    $rules = parent::getSchemaValidation();
-//    if ($this->getMaxLength()) {
-//        $rules['max'] = [
-//            'length' => $this->getMaxLength(),
-//        ];
-//    }
-//    return $rules;
-//}

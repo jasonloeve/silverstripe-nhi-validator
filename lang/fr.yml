@@ -1,0 +1,3 @@
+fr:
+  JasonLoeve\NHIValidator\Forms\NHIValidatorField:
+    INVALID_FORMAT: 'Format NHI invalide.'
