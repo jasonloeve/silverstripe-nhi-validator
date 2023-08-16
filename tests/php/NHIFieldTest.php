@@ -1,8 +1,8 @@
 <?php
 
-use SilverStripe\Dev\SapphireTest;
-use JasonLoeve\NHIValidator\NHIField;
+use JasonLoeve\NHIValidator\FieldType\NHIField;
 use JasonLoeve\NHIValidator\Forms\NHIValidatorField;
+use SilverStripe\Dev\SapphireTest;
 
 class NHIFieldTest extends SapphireTest
 {

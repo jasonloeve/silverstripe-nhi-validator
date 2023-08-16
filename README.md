@@ -34,11 +34,11 @@ composer require jasonloeve/silverstripe-nhi-validator ^5@dev
 
 ## Usage
 To specify an NHI database field on a DataObject, you can create a new class called "Patient" that extends "DataObject" and define the "NHINumber" field as a custom database field with the type "NHIField," which is equivalent to a Varchar(7). Additionally, when scaffolding a form, any NHI database field will automatically use the "NHIField" form field instead of the standard "TextField."
+
 ```php
 <?php
 
-use SilverStripe\ORM\DataObject;
-use JasonLoeve\NHIValidator\NHIField;
+use JasonLoeve\NHIValidator\FieldType\NHIField;use SilverStripe\ORM\DataObject;
 
 class Patient extends DataObject
 {

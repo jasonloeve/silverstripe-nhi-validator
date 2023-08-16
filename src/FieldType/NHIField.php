@@ -1,6 +1,6 @@
 <?php
 
-namespace JasonLoeve\NHIValidator;
+namespace JasonLoeve\NHIValidator\FieldType;
 
 use JasonLoeve\NHIValidator\Forms\NHIValidatorField;
 use SilverStripe\ORM\FieldType\DBField;
@@ -10,6 +10,13 @@ use SilverStripe\ORM\FieldType\DBVarchar;
  * NHI FieldType
  * This class represents a custom NHI (National Health Index) field type that extends DBVarchar.
  * The NHIField class is used to store and handle NHI numbers in SilverStripe applications.
+ */
+/**
+ * Class Varchar represents a variable-length string of up to 255 characters, designed to store raw text
+ *
+ * @see DBHTMLText
+ * @see DBHTMLVarchar
+ * @see DBText
  */
 class NHIField extends DBVarchar
 {
