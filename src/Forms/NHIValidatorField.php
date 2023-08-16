@@ -54,7 +54,7 @@ class NHIValidatorField extends TextField
      * @param Validator $validator Validator instance for registering validation errors.
      * @return bool True if validation passes, false otherwise.
      */
-    public function validate(Validator $validator)
+    public function validate($validator)
     {
         // First, ensure basic TextField validations are satisfied.
         if (!parent::validate($validator)) {
@@ -73,4 +73,36 @@ class NHIValidatorField extends TextField
         }
         return true;
     }
+
+
+
+
+
+
+
+
+//    /**
+//     * Validate this field
+//     *
+//     * @param Validator $validator
+//     * @return bool
+//     */
+//    public function validate($validator)
+//    {
+//        $result = true;
+//        if (!is_null($this->maxLength) && mb_strlen($this->value ?? '') > $this->maxLength) {
+//            $name = strip_tags($this->Title() ? $this->Title() : $this->getName());
+//            $validator->validationError(
+//                $this->name,
+//                _t(
+//                    'SilverStripe\\Forms\\TextField.VALIDATEMAXLENGTH',
+//                    'The value for {name} must not exceed {maxLength} characters in length',
+//                    ['name' => $name, 'maxLength' => $this->maxLength]
+//                ),
+//                "validation"
+//            );
+//            $result = false;
+//        }
+//        return $this->extendValidationResult($result, $validator);
+//    }
 }
