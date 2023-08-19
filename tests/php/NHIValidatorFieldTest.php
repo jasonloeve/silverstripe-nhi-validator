@@ -13,7 +13,7 @@ class NHIValidatorFieldTest extends SapphireTest
         $field = new NHIValidatorField('NHI');
 
         // Valid value
-        $field->setValue('ABC1234'); // Use a real valid format
+        $field->setValue('ABC1234');
         $this->assertTrue($field->validateString());
 
         // Invalid value
@@ -27,7 +27,7 @@ class NHIValidatorFieldTest extends SapphireTest
         $validator = new Validator();
 
         // Valid value
-        $field->setValue('ABC1234'); // Use a real valid format
+        $field->setValue('ABC1234');
         $this->assertTrue($field->validate($validator));
 
         // Invalid value
