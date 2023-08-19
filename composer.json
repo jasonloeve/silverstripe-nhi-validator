@@ -16,8 +16,9 @@
             "email": "jasonloeve@gmail.com"
         }
     ],
+    "homepage": "http://github.com/jasonloeve/silverstripe-nhi-validator",
     "support": {
-        "issues": "https://github.com/jasonloeve/nhi-validation-poc/issues"
+        "issues": "https://github.com/jasonloeve/silverstripe-nhi-validator/issues"
     },
     "license": "BSD-3-Clause",
     "require": {
