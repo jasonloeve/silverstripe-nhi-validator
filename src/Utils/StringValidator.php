@@ -10,13 +10,23 @@ class StringValidator
     private string $legacyPattern;
     private string $newFormatPattern;
 
+    /**
+     * Constructor initializes the string and its patterns.
+     *
+     * @param string $string
+     */
     public function __construct(string $string)
     {
         $this->string = $string;
-        $this->legacyPattern = '/^(?=.{7}$)[A-Za-z]{3}[0-9]{3}[0-9]$/'; // need to exclude i and o from first three
-        $this->newFormatPattern = '/^(?=.{7}$)[A-Za-z]{3}[0-9]{2}[A-Za-z]{2}$/'; // need to exclude i and o from first three
+        $this->legacyPattern = '/^(?=.{7}$)[A-Za-z]{3}[0-9]{3}[0-9]$/';
+        $this->newFormatPattern = '/^(?=.{7}$)[A-Za-z]{3}[0-9]{2}[A-Za-z]{2}$/';
     }
 
+    /**
+     * Validates the string based on the patterns.
+     *
+     * @return bool True if the string matches either pattern, false otherwise.
+     */
     public function validateString(): bool
     {
         // Adapted to return a boolean
@@ -29,6 +39,12 @@ class StringValidator
         }
     }
 
+    /**
+     * Processes and validates the string based on the specified format type.
+     *
+     * @param string $formatType Either 'legacyFormat' or 'newFormat'.
+     * @return bool True if the string is valid, false otherwise.
+     */
     private function processString(string $formatType): bool
     {
         $extractor = new LetterExtractor();

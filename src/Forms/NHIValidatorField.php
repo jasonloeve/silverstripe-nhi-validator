@@ -2,8 +2,8 @@
 
 namespace JasonLoeve\NHIValidator\Forms;
 
-use SilverStripe\Forms\Form;
 use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\Validator;
 use JasonLoeve\NHIValidator\Utils\StringValidator;
 
 /**
@@ -28,7 +28,7 @@ class NHIValidatorField extends TextField
         }
 
         // Call the parent constructor while defining a maximum character limit of 7.
-        parent::__construct($name, $title, 7, $value, $form);
+        parent::__construct($name, $title, $value, $form);
 
         // Add a CSS class 'text' to the field for styling.
         $this->addExtraClass('text');

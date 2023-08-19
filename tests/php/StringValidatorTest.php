@@ -7,20 +7,51 @@ use JasonLoeve\NHIValidator\Utils\StringValidator;
 
 class StringValidatorTest extends SapphireTest
 {
-    public function testValidateString()
+    // Test if the string is too long (should fail)
+    public function testStringTooLong()
     {
-        // Assuming you've updated StringValidator::validateString to return a bool
-
-        // Test valid legacy format
-        $validator = new StringValidator('ABC1234'); // Use a real valid legacy format
-        $this->assertTrue($validator->validateString());
-
-        // Test valid new format
-        $validator = new StringValidator('ABC12XY'); // Use a real valid new format
-        $this->assertTrue($validator->validateString());
-
-        // Test invalid format
-        $validator = new StringValidator('INVALID1');
+        $string = 'ARE62RS123';
+        $validator = new StringValidator($string);
         $this->assertFalse($validator->validateString());
+    }
+
+    // Test if the string is too short (should fail)
+    public function testStringTooShort()
+    {
+        $string = 'ARE62';
+        $validator = new StringValidator($string);
+        $this->assertFalse($validator->validateString());
+    }
+
+    // Test if the legacy format is incorrect (should fail)
+    public function testLegacyFormatIncorrect()
+    {
+        $string = 'ZAA0025';
+        $validator = new StringValidator($string);
+        $this->assertFalse($validator->validateString());
+    }
+
+    // Test if the new format is incorrect (should fail)
+    public function testNewFormatIncorrect()
+    {
+        $string = 'ARE62RA';
+        $validator = new StringValidator($string);
+        $this->assertFalse($validator->validateString());
+    }
+
+    // Test if the legacy format is correct (should pass)
+    public function testLegacyFormatCorrect()
+    {
+        $string = 'ZAA0024';
+        $validator = new StringValidator($string);
+        $this->assertTrue($validator->validateString());
+    }
+
+    // Test if the new format is correct (should pass)
+    public function testNewFormatCorrect()
+    {
+        $string = 'ARE62RS';
+        $validator = new StringValidator($string);
+        $this->assertTrue($validator->validateString());
     }
 }
